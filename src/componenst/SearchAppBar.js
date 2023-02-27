@@ -12,6 +12,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import { Button } from '@mui/material';
 import { LoginContext } from '../App';
+import { useNavigate } from 'react-router-dom';
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
@@ -52,12 +53,13 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function PrimarySearchAppBar() {
+export default function SearchAppBar() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const {isLogin ,setIsLogin ,  setOpenLoginDialog, setSearch} =React.useContext(LoginContext)
+  const navigate= useNavigate()
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -132,7 +134,9 @@ export default function PrimarySearchAppBar() {
     setSearch(e.currentTarget.value)
     
   }
-
+  const handletoHome =()=>{
+  navigate("/")
+  }
   return (
     <Box sx={{ flexGrow: 1,mb:1 }}>
       <AppBar position="static">
@@ -142,6 +146,7 @@ export default function PrimarySearchAppBar() {
             noWrap
             component="div"
             sx={{ display: { xs: 'none', sm: 'block' } }}
+            onClick={handletoHome}
           >
             Job Routing
           </Typography>

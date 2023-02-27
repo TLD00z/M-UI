@@ -10,6 +10,7 @@ import { createTheme, Divider, ThemeProvider } from '@mui/material';
 
 import Modal from '@mui/material/Modal';
 import { LoginContext } from '../App';
+import { useNavigate } from 'react-router-dom';
 
 const bntTheme = createTheme({
   palette: {
@@ -34,12 +35,20 @@ const style = {
 export default function JobCard ({ job })   {
   const {isLogin , setOpenLoginDialog} =React.useContext(LoginContext)
   const [open, setOpen] = React.useState(false);
-  const handleOpen =  () => setOpen(true);
+
   const handleClose = () => setOpen(false);
-  
+  const navigate= useNavigate()
+  const handleDetail = (id)=>{
+    if (isLogin) {
+      navigate(`/detail/${id}`)
+    }else{
+      setOpenLoginDialog(true)
+    }
+    
+  }
 
   return (
-    <Card sx={{ maxWidth: 400,minHeight:270,background: '#615D5C',display:"flex",flexDirection:"column",justifyContent:"space-around" }}>
+    <Card sx={{mr:2, maxWidth: 400 ,minHeight:270,background: '#615D5C',display:"flex",flexDirection:"column",justifyContent:"space-around" }}>
       <CardContent>
         <Typography sx={{ fontSize: 18,color:"#fff" }} color="text.secondary" gutterBottom>
           {job.title}
@@ -55,7 +64,7 @@ export default function JobCard ({ job })   {
       </CardContent>
       <CardActions sx={{justifyContent:"center"}}>
       <ThemeProvider theme={bntTheme}>
-      {isLogin? <Button onClick={handleOpen}>LEARN MORE</Button>:<Button onClick={() => setOpenLoginDialog(true)
+      {isLogin? <Button onClick={()=>handleDetail(job.id)}>LEARN MORE</Button>:<Button onClick={() => setOpenLoginDialog(true)
 }>LEARN MORE</Button>}
       <Modal
         open={open}
