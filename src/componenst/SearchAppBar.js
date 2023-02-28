@@ -13,6 +13,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import { Button } from '@mui/material';
 import { LoginContext } from '../App';
 import { useNavigate } from 'react-router-dom';
+
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
@@ -75,7 +76,10 @@ export default function SearchAppBar() {
   
   const handelLoginbnt=()=> setOpenLoginDialog(true)
 
-  const handelLogoutbnt=()=> setIsLogin(false)
+  const handelLogoutbnt=()=> {
+    setIsLogin(false)
+    navigate("/")
+  }
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
@@ -135,7 +139,11 @@ export default function SearchAppBar() {
     
   }
   const handletoHome =()=>{
-  navigate("/")
+    if (isLogin) {
+      navigate("/job")
+    }else{
+      navigate("/")
+    }
   }
   return (
     <Box sx={{ flexGrow: 1,mb:1 }}>

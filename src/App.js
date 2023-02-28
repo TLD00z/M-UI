@@ -11,6 +11,7 @@ import AppIndex from './componenst/AppIndex'
 //import apiService from './app/apiService';//json-server lấy không hết
 import { Route, Routes } from 'react-router-dom';
 import Detail from './componenst/Detail';
+import Homepage from './componenst/Homepage';
 
 
 export const LoginContext  = createContext()
@@ -41,7 +42,8 @@ function App() {
       <SearchAppBar theme={theme}/>
       <Container>
     <Routes>
-      <Route path='/' element={<AppIndex/>}/>
+      <Route path='/' element={<Homepage/>}/>
+      <Route path='/job' element={<AppIndex/>}/>
       <Route path='/detail/:id' element={<Detail/>} />
     </Routes>
       </Container>

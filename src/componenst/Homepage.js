@@ -1,27 +1,18 @@
 import { CssVarsProvider } from "@mui/joy"
 import { Box, createTheme, Grid, Pagination, ThemeProvider } from "@mui/material"
-import {  useContext, useEffect, useState } from "react"
+import {   useEffect, useState } from "react"
 import apiService from "../app/apiService"
 import JobCard from "./JobCard"
 import LoginDialog from "./loginDialog"
 import tjobs from "./jobData.json"
-import { useNavigate } from "react-router-dom"
-import { LoginContext } from "../App"
 
 
-function AppIndex() {
-  const {isLogin } =useContext(LoginContext)
-  const navigate= useNavigate()
 
+function Homepage() {
+ 
   const [jobs, setJobs] = useState([])
   const [search] = useState("")
-
-  useEffect(()=>{
-   if (!isLogin) {
-    navigate("/")
-  } 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  },[])
+ 
 
   useEffect(() => {
     const fetchData = async(search)=>{
@@ -49,10 +40,9 @@ function AppIndex() {
   const handlePage=(e,page)=>(
     setPage(page)
   )
- 
+  
   return (
     <Box >
-      {isLogin&&
         <ThemeProvider theme={theme} >
             <Box>
                 <Grid container  spacing={{ xs: 2, md: 3 ,lg :4 }} columns={{ xs: 4, sm : 8,  md: 12 , lg:18 }} >
@@ -75,7 +65,6 @@ function AppIndex() {
         </Box>
       
     </ThemeProvider>
-      }
     
    
     
@@ -83,4 +72,4 @@ function AppIndex() {
   );
 }
 
-export default AppIndex;
+export default Homepage;

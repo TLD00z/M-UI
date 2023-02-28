@@ -11,11 +11,13 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { FormProvider,FTextField } from "./form"
 import { LoginContext, } from "../App"
 import { loginApi } from './loginFakeApi';
+import { useNavigate } from 'react-router-dom';
 
 
 
 
 export default function LoginDialog() {
+  const navigate= useNavigate()
   const defaultValues ={
     username:"abc",
     password:"123"
@@ -34,6 +36,7 @@ export default function LoginDialog() {
       await loginApi(data.username ,data.password)
       setIsLogin(true) 
       setOpenLoginDialog(false) 
+      navigate(`/job`)
     } catch (error) {
       setIsLogin(false)
     }
